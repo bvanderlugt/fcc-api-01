@@ -2,6 +2,7 @@
 
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var dateBuilder = require(path + '/app/controllers/dateBuilder.server.js');
 
 module.exports = function (app, passport) {
 
@@ -54,4 +55,15 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
+	
+	app.route('/timestamp')
+		.get(function(req, res) {
+		    res.sendFile(path + '/public/timestamp.html');
+		});
+	
+	app.route('/timestamp/:time')
+		.get(function(req, res) {
+			var t = dateBuilder(req);
+			res.send(t);
+		});
 };
