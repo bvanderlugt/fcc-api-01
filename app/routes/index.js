@@ -4,7 +4,8 @@ var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var dateBuilder = require(path + '/app/controllers/dateBuilder.server.js');
 
-module.exports = function (app, passport) {
+// module.exports = function (app, passport) {
+module.exports = function (app) {	
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
